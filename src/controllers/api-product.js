@@ -5,13 +5,13 @@ class APIProduct{
     async show(req,res){
         const page = req.query.page;
         const pageNumber = parseInt(page);
-        const limitNumber = 5;
+        const limitNumber = 6;
         const skip = (pageNumber - 1) * limitNumber;
         try{
-            const products = await Product.find().skip(skip).limit(limitNumber);
-            const totalProducts = await Product.countDocuments();
-            console.log(totalProducts)
-            res.status(200).json({products, totalProducts});
+            const products = await Product.find({soluong : {$gt: 0 }}).skip(skip).limit(limitNumber);
+            const totalProducts = await Product.countDocuments({soluong : {$gt: 0 }});
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+            res.status(200).json({products, totalPages});
         }catch(err){
             res.status(404).json({message: err.message});
         }

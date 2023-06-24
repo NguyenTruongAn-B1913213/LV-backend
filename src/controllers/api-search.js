@@ -8,7 +8,6 @@ class APISearch{
         try{
             const search = await Product.find({ten: {$regex: searchKey , $options: 'i'}});
             res.status(200).json(search);
-            console.log(search)
         }catch(err){
             res.status(404).json({message: err.message});
         }

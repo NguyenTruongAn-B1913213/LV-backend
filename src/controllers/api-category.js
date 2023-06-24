@@ -3,11 +3,41 @@ const Product = require("../models/product");
 class APICategory{
 
     //đọc tất cả các product
+    async categorynam(req,res){
+        const danhmuc = "Đồng Hồ Nam"
+        try{
+            const category = await Product.find({category: danhmuc});
+            res.status(200).json(category);
+            // console.log(category)
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
+    async categorynu(req,res){
+        const danhmuc = "Đồng Hồ Nữ"
+        try{
+            const category = await Product.find({category: danhmuc});
+            res.status(200).json(category);
+            // console.log(category)
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
+    async categorydoi(req,res){
+        const danhmuc = "Đồng Hồ Đôi"
+        try{
+            const category = await Product.find({category: danhmuc});
+            res.status(200).json(category);
+            // console.log(category)
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
     async showcategory(req,res){
         try{
             const category = await Category.find();
             res.status(200).json(category);
-            console.log(category)
+            // console.log(category)
         }catch(err){
             res.status(404).json({message: err.message});
         }
@@ -49,7 +79,7 @@ class APICategory{
     }
     //xóa sản phẩm
     async deletecategory(req, res){
-        const id = req.params.id;
+        const id = req.params.name;
         console.log(id)
         try {
             const data = await Category.findByIdAndDelete(id);
@@ -58,6 +88,5 @@ class APICategory{
             res.status(404).json({message: err.message});
         }
     }
-
 }
 module.exports =  new APICategory;
