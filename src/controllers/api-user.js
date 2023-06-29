@@ -55,15 +55,16 @@ class APIUser{
         })
     }
     async authenticateToken(req, res, next) {
-      const token = req.headers.Authorization;
+      // console.log({header:req.headers.authorization});
+      const token = req.headers.authorization;
       console.log(token)
       if (!token) {
         return res.status(401).json({ error: 'Authentication token required.' });
       }
-    
       jwt.verify(token.split(' ')[1], 'secret-key', (err, decodedToken) => {
         if (err) {
-          return res.status(403).json({ error: 'Invalid token.' });
+          console.log(err)
+          return res.status(404).json({ error: 'Invalid token.' });
         }
         req.user = decodedToken;
         next();
