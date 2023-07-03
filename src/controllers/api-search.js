@@ -14,7 +14,6 @@ class APISearch{
             const search = await Product.find({ten: {$regex: searchKey , $options: 'i'},soluong : {$gt: 0 } })
                                     .skip(skip)
                                     .limit(limitNumber);
-            console.log(search)
             const totalProducts = await Product.countDocuments({ten: {$regex: searchKey , $options: 'i'},soluong : {$gt: 0 } });
             const totalPages = Math.ceil(totalProducts / limitNumber);
             res.status(200).json({search,totalPages});

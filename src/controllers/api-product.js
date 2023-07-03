@@ -16,6 +16,66 @@ class APIProduct{
             res.status(404).json({message: err.message});
         }
     }
+    async showNam(req,res){
+        const danhmuc = "Đồng Hồ Nam"
+        const page = req.query.page;
+        const pageNumber = parseInt(page);
+        const limitNumber = 6;
+        const skip = (pageNumber - 1) * limitNumber;
+        try{
+            const category = await Product.find({ category: danhmuc ,soluong: { $gt: 0 } }).skip(skip).limit(limitNumber);
+            const totalProducts = await Product.countDocuments({ category: danhmuc ,soluong: { $gt: 0 } });
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+            res.status(200).json({category,totalPages});
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
+    async showNu(req,res){
+        const danhmuc = "Đồng Hồ Nữ"
+        const page = req.query.page;
+        const pageNumber = parseInt(page);
+        const limitNumber = 6;
+        const skip = (pageNumber - 1) * limitNumber;
+        try{
+            const category = await Product.find({ category: danhmuc ,soluong: { $gt: 0 } }).skip(skip).limit(limitNumber);
+            const totalProducts = await Product.countDocuments({ category: danhmuc ,soluong: { $gt: 0 } });
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+            res.status(200).json({category,totalPages});
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
+    async showdoi(req,res){
+        const danhmuc = "Đồng Hồ Đôi"
+        const page = req.query.page;
+        const pageNumber = parseInt(page);
+        const limitNumber = 6;
+        const skip = (pageNumber - 1) * limitNumber;
+        try{
+            const category = await Product.find({ category: danhmuc ,soluong: { $gt: 0 } }).skip(skip).limit(limitNumber);
+            const totalProducts = await Product.countDocuments({ category: danhmuc ,soluong: { $gt: 0 } });
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+            res.status(200).json({category,totalPages});
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
+    async showPhuKien(req,res){
+        const danhmuc = "Phụ Kiện"
+        const page = req.query.page;
+        const pageNumber = parseInt(page);
+        const limitNumber = 6;
+        const skip = (pageNumber - 1) * limitNumber;
+        try{
+            const category = await Product.find({ category: danhmuc ,soluong: { $gt: 0 } }).skip(skip).limit(limitNumber);
+            const totalProducts = await Product.countDocuments({ category: danhmuc ,soluong: { $gt: 0 } });
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+            res.status(200).json({category,totalPages});
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
     async detail(req,res){
         const id = req.params.id;
         try {

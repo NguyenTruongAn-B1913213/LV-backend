@@ -15,12 +15,16 @@ router.get("/danhmuc",category.showcategory);
 router.get("/search",search.searchProduct);
 router.get('/success', paymentController.executePayment);
 router.get('/cancel', paymentController.cancelPayment);
-// router.get("/phanloai/nam",category.categorynam);
-// router.get("/phanloai/nu",category.categorynu);
-// router.get("/phanloai/doi",category.categorydoi);
+router.get("/phanloai/nam",category.categorynam);
+router.get("/phanloai/nu",category.categorynu);
+router.get("/phanloai/doi",category.categorydoi);
+router.get("/phanloai/phukien",category.categoryphukien);
 router.get("/:id",product.detail);
-router.get("/danhmuc/:category",category.detailcategory);
-
+// router.get("/danhmuc/:category",category.detailcategory);
+router.get("/danhmuc/nam",product.showNam);
+router.get("/danhmuc/nu",product.showNu);
+router.get("/danhmuc/doi",product.showdoi);
+router.get("/danhmuc/phukien",product.showPhuKien);
 
 
 router.post("/",product.create);
