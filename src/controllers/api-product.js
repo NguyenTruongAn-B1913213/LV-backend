@@ -2,6 +2,14 @@ const Product = require("../models/product");
 class APIProduct{
 
     //đọc tất cả các product
+    async showProduct(req,res){
+        try{
+            const products = await Product.find()
+            res.status(200).json({products});
+        }catch(err){
+            res.status(404).json({message: err.message});
+        }
+    }
     async show(req,res){
         const page = req.query.page;
         const pageNumber = parseInt(page);

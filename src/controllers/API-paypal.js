@@ -9,6 +9,7 @@ class APIPaypal{
 
     //đọc tất cả các product
     async createPayment(req,res){
+      const total = req.body.totalPrice;
         const payment = {
             intent: 'sale',
             payer: {
@@ -20,7 +21,7 @@ class APIPaypal{
             },
             transactions: [{
               amount: {
-                total: '1.00',
+                total:  total.toString(),
                 currency: 'USD'
               },
               description: 'Payment description'

@@ -9,20 +9,24 @@ const search = require("../controllers/api-search")
 const delivery = require("../controllers/api-delivery")
 const paymentController = require("../controllers/API-paypal")
 
+// user.authenticateToken,user.authorizeAdmin,
+router.get("/",product.show);
 
-router.get("/",user.authenticateToken,user.authorizeAdmin,product.show);
 router.get("/danhmuc",category.showcategory);
 router.get("/search",search.searchProduct);
+router.get("/delivery",delivery.getDelivery);
 router.get('/success', paymentController.executePayment);
 router.get('/cancel', paymentController.cancelPayment);
 router.get("/phanloai/nam",category.categorynam);
 router.get("/phanloai/nu",category.categorynu);
 router.get("/phanloai/doi",category.categorydoi);
 router.get("/phanloai/phukien",category.categoryphukien);
+
 router.get("/:id",product.detail);
 // router.get("/danhmuc/:category",category.detailcategory);
 router.get("/danhmuc/nam",product.showNam);
 router.get("/danhmuc/nu",product.showNu);
+router.get("/product/name",product.showProduct);
 router.get("/danhmuc/doi",product.showdoi);
 router.get("/danhmuc/phukien",product.showPhuKien);
 
