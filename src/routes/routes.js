@@ -1,49 +1,83 @@
-const express = require('express');
-const { model } = require('mongoose');
-const facebook = require("../controllers/api-login-facebook");
+const express = require("express");
+const { model } = require("mongoose");
 const router = express.Router();
-const product = require("../controllers/api-product");
 const user = require("../controllers/api-user");
-const category = require("../controllers/api-category");
-const search = require("../controllers/api-search")
-const delivery = require("../controllers/api-delivery")
-const paymentController = require("../controllers/API-paypal")
-
+const LichKham = require("../controllers/api-dk");
+const LichKhamBS = require("../controllers/xnLichKham");
+const LichKhamBN = require("../controllers/xemLichKham");
+const Thuoc = require("../controllers/ttThuoc");
+const toaThuoc = require("../controllers/toaThuoc");
+const ttPhongKham = require("../controllers/ttPhongKham");
+const BS = require("../controllers/api-BS");
+const TinTuc = require("../controllers/tintuc");
+const BN = require("../controllers/BN");
+const Notification = require("../controllers/api-notification");
+const Thongke = require("../controllers/Thongke");
+const { join } = require("path");
 // user.authenticateToken,user.authorizeAdmin,
-router.get("/",product.show);
+// Bệnh Nhân
+router.put("/benhNhan/lich-kham/update/:id", BN.UpdateBN);
+// bac sĩ
+router.get("/get-bacsi", BS.getBacSi);
+router.get("/get-datework", BS.getNgayLamViec);
+router.get("/getID-bacsi/:id", BS.getIDBacSi);
+router.post("/lich-lam-viec", BS.createdNgayLamViec);
+router.post("/them-lich-lam-viec/:id", BS.updateLichLamViec);
+router.put("/admin/lich-kham/xac-nhan/:lichKhamId", LichKhamBS.xacNhanLichKham);
+router.put("/admin/inforBS/:id", BS.updateinforBS);
+// Lịch Khám
+router.get("/bacsi/lich-kham", LichKhamBS.LichKhamBS);
+router.get(
+  "/benhnhan/lich-kham",
+  // user.authenticateToken,
+  LichKhamBN.LichKhamBN
+);
+router.get("/lichkham/:appointmentId", LichKhamBS.detailLichKham);
 
-router.get("/danhmuc",category.showcategory);
-router.get("/search",search.searchProduct);
-router.get("/delivery",delivery.getDelivery);
-router.get('/success', paymentController.executePayment);
-router.get('/cancel', paymentController.cancelPayment);
-router.get("/phanloai/nam",category.categorynam);
-router.get("/phanloai/nu",category.categorynu);
-router.get("/phanloai/doi",category.categorydoi);
-router.get("/phanloai/phukien",category.categoryphukien);
+router.put("/benhnhan/lich-kham/huy/:lichKhamId", LichKhamBN.huyLichKham);
+// thuốc
+router.get("/thuoc", Thuoc.getThuoc);
+router.get("/thuoc/search", Thuoc.seachThuoc);
+router.post("/thuoc/create", Thuoc.createdThuoc);
 
-router.get("/:id",product.detail);
-// router.get("/danhmuc/:category",category.detailcategory);
-router.get("/danhmuc/nam",product.showNam);
-router.get("/danhmuc/nu",product.showNu);
-router.get("/product/name",product.showProduct);
-router.get("/danhmuc/doi",product.showdoi);
-router.get("/danhmuc/phukien",product.showPhuKien);
+// Toa thuốc
+router.post("/create-prescription", toaThuoc.createdToaThuoc);
+router.get("/prescriptions", user.authenticateToken, toaThuoc.getToaThuoc);
+router.get("/get-prescription/:prescriptionId", toaThuoc.getToaThuocWithID);
+// router.get("/prescriptions", user.authenticateToken, toaThuoc.getToaThuoc);
+//Tin tức
+router.get("/get-tintuc", TinTuc.getTinTuc);
+router.post("/create-tintuc", TinTuc.createdTinTuc);
+router.get("/get-tintuc/:id", TinTuc.getTinTucWithID);
+// Thông tin phong khám
+router.get("/phongkham", ttPhongKham.getPhongKham);
+router.get("/get-phongkham/:id", ttPhongKham.getIDPhongKham);
+router.post("/phongkham/create", ttPhongKham.createdttPhongKham);
 
+router.put("/phongkham/update/:id", ttPhongKham.updateTTPhongKham);
 
-router.post("/",product.create);
-router.post('/create-payment', paymentController.createPayment);
-router.post("/facebook",facebook.loginFacebook);
-router.post("/delivery",delivery.Delivery);
-router.put("/delivery/:id/status",delivery.updateSatus)
-router.patch("/:id",product.update);
-router.delete("/:id",product.delete);
-router.post("/danhmuc",category.createcategory);
-router.patch("/danhmuc/:id",category.updatecategory);
-router.delete("/danhmuc/:id",category.deletecategory);
+router.post(
+  "/lichkham",
+  // user.authenticateToken,
+  LichKham.registerLichKham
+);
+router.get("/get-LichKham", LichKhamBS.getLichKham);
+// thông báo realtime
+router.get("/get-notification", Notification.GetNotification);
+router.get(
+  "/check-notification/:appointmentId",
+  Notification.CheckNotification
+);
+router.get("/check-toathuoc/:appointmentId", Notification.CheckToaTHuoc);
+// Thống kê
+router.get("/get-Thongke", Thongke.getThongKe);
+router.get("/get-Thongke/BS", Thongke.getThongKeBS);
+// router.post("/save-notification", Notification.SaveNotification);
 
-router.post("/user/register",user.register);
-router.post("/user/login",user.login);
+router.get("/user/profile", user.authenticateToken, user.profileUser);
 
+router.post("/user/register", user.registerBenhnhan);
+router.post("/user/register1", user.registerBacSi);
+router.post("/user/login", user.login);
 
 module.exports = router;
