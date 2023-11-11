@@ -116,6 +116,7 @@ class APIUser {
           message: "Mật khẩu không đúng",
         });
       }
+      console.log(User);
       let token = jwt.sign(
         { UserId: user._id, role: user.role },
         "secret-key",
@@ -146,24 +147,25 @@ class APIUser {
   }
   async profileUser(req, res) {
     try {
+      console.log(1);
       const userId = req.UserId;
       const userRole = req.Role;
-      if (userRole === "bacsi") {
+      if (userRole === "bacsi" || userRole === "admin") {
         const doctor = await BacSi.findOne({ idtk: userId });
         if (!doctor) {
           return res
             .status(404)
             .json({ message: "Không tìm thấy thông tin bác sĩ" });
         }
-        return res.status(200).json(doctor);
+        return res.status(200).json({ doctor, userRole });
       } else {
-        const patient = await ttUser.findOne({ idtk: userId });
-        if (!patient) {
+        const doctor = await ttUser.findOne({ idtk: userId });
+        if (!doctor) {
           return res
             .status(404)
             .json({ message: "Không tìm thấy thông tin bệnh nhân" });
         }
-        return res.status(200).json(patient);
+        return res.status(200).json({ doctor, userRole });
       }
     } catch (error) {
       console.log(error);
