@@ -22,6 +22,18 @@ class APIBacSi {
       res.status(400).json({ error: error.message });
     }
   }
+  async getnameBacSi(req, res) {
+    try {
+      const id = req.params.name;
+      console.log(id);
+      const doctor = await bacsi.findOne({
+        name: new RegExp(req.params.name, "i"),
+      });
+      res.status(200).json(doctor);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
   async updateLichLamViec(req, res) {
     try {
       const { id } = req.params;
@@ -53,89 +65,131 @@ class APIBacSi {
       const ngayLamViec = [
         // Ca sáng từ thứ 2 đến Chủ Nhật
         {
-          thu: "Thứ Hai",
+          thu: "Thứ 2",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
-          thu: "Thứ Ba",
+          thu: "Thứ 3",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
-          thu: "Thứ Tư",
+          thu: "Thứ 4",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
-          thu: "Thứ Năm",
+          thu: "Thứ 5",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
-          thu: "Thứ Sáu",
+          thu: "Thứ 6",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
-          thu: "Thứ Bảy",
+          thu: "Thứ 7",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
         {
           thu: "Chủ Nhật",
           ca: "Sáng",
-          gioBatDau: "07:00",
-          gioKetThuc: "11:00",
+          gioBatDau: "06:00",
+          gioKetThuc: "07:",
         },
-        // Ca chiều từ thứ 2 đến Chủ Nhật
+        // Ca Trưa từ thứ 2 đến Chủ Nhật
         {
-          thu: "Thứ Hai",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
-        },
-        {
-          thu: "Thứ Ba",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          thu: "Thứ 2",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
         },
         {
-          thu: "Thứ Tư",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          thu: "Thứ 3",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
         },
         {
-          thu: "Thứ Năm",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          thu: "Thứ 4",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
         },
         {
-          thu: "Thứ Sáu",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          thu: "Thứ 5",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
         },
         {
-          thu: "Thứ Bảy",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          thu: "Thứ 6",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
+        },
+        {
+          thu: "Thứ 7",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
         },
         {
           thu: "Chủ Nhật",
-          ca: "Chiều",
-          gioBatDau: "13:00",
-          gioKetThuc: "17:00",
+          ca: "Trưa",
+          gioBatDau: "11:00",
+          gioKetThuc: "12:30",
+        },
+        {
+          thu: "Thứ 2",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Thứ 3",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Thứ 4",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Thứ 5",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Thứ 6",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Thứ 7",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
+        },
+        {
+          thu: "Chủ Nhật",
+          ca: "Tối",
+          gioBatDau: "17:00",
+          gioKetThuc: "20:30",
         },
       ];
       const promises = ngayLamViec.map(async (ngayLamViec) => {
@@ -144,7 +198,7 @@ class APIBacSi {
       });
       await Promise.all(promises);
 
-      res.status(201).json(result);
+      res.status(201).json({ promises });
     } catch (error) {
       // Handle errors and send an error response
       console.error(error);

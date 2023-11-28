@@ -37,12 +37,12 @@ class APILichKham {
 
       const daysOfWeek = [
         "Chủ Nhật",
-        "Thứ Hai",
-        "Thứ Ba",
-        "Thứ Tư",
-        "Thứ Năm",
-        "Thứ Sáu",
-        "Thứ Bảy",
+        "Thứ 2",
+        "Thứ 3",
+        "Thứ 4",
+        "Thứ 5",
+        "Thứ 6",
+        "Thứ 7",
       ];
       const selectedDayIndex = daysOfWeek.indexOf(ngaygioKham.thu);
       if (selectedDayIndex === -1) {
@@ -126,6 +126,7 @@ class APILichKham {
         .json({ error: "Đã xảy ra lỗi trong quá trình xử lý" });
     }
   }
+
   // quá đông
   // chuyển giờ thành option
   //trả về người dùng stt bệnh nhân

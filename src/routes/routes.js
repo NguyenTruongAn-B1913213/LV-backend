@@ -13,7 +13,9 @@ const TinTuc = require("../controllers/tintuc");
 const BN = require("../controllers/BN");
 const Notification = require("../controllers/api-notification");
 const Thongke = require("../controllers/Thongke");
+const ChuanDoan = require("../controllers/api-chuandoan");
 const { join } = require("path");
+const chuandoan = require("../models/chuandoan");
 // user.authenticateToken,user.authorizeAdmin,
 // Bệnh Nhân
 router.put("/benhNhan/lich-kham/update/:id", BN.UpdateBN);
@@ -21,6 +23,7 @@ router.put("/benhNhan/lich-kham/update/:id", BN.UpdateBN);
 router.get("/get-bacsi", BS.getBacSi);
 router.get("/get-datework", BS.getNgayLamViec);
 router.get("/getID-bacsi/:id", BS.getIDBacSi);
+router.get("/getName-bacsi/:name", BS.getnameBacSi);
 router.post("/lich-lam-viec", BS.createdNgayLamViec);
 router.post("/them-lich-lam-viec/:id", BS.updateLichLamViec);
 router.put("/admin/lich-kham/xac-nhan/:lichKhamId", LichKhamBS.xacNhanLichKham);
@@ -32,6 +35,11 @@ router.get(
   // user.authenticateToken,
   LichKhamBN.LichKhamBN
 );
+router.get("/History/:id", ChuanDoan.historyLK);
+router.get("/chuandoanLK/:id", ChuanDoan.ChuanDoanID);
+router.get("/chuandoanLKTime/:id", ChuanDoan.historyLKTime);
+router.post("/chuandoan", ChuanDoan.ChuanDoan);
+
 router.get("/lichkham/:appointmentId", LichKhamBS.detailLichKham);
 
 router.put("/benhnhan/lich-kham/huy/:lichKhamId", LichKhamBN.huyLichKham);
@@ -72,6 +80,8 @@ router.get("/check-toathuoc/:appointmentId", Notification.CheckToaTHuoc);
 // Thống kê
 router.get("/get-Thongke", Thongke.getThongKe);
 router.get("/get-Thongke/BS", Thongke.getThongKeBS);
+router.get("/get-Thongke/report", Thongke.getThongKeReport);
+router.get("/get-Thongke/BS/report", Thongke.getThongKeBSReport);
 // router.post("/save-notification", Notification.SaveNotification);
 
 router.get("/user/profile", user.authenticateToken, user.profileUser);

@@ -13,7 +13,7 @@ const lichKhamSchema = mongoose.Schema({
   trieuchung: { type: String, require: true },
   trangThai: {
     type: String,
-    enum: ["Hủy", "Xác Nhận", "Đang Duyệt"],
+    enum: ["Hủy", "Xác Nhận", "Đang Duyệt", "Đã Khám"],
     default: "Đang Duyệt",
   },
   trangThaiNotification: { type: Boolean, default: false },

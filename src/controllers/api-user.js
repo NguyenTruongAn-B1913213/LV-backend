@@ -150,7 +150,7 @@ class APIUser {
       console.log(1);
       const userId = req.UserId;
       const userRole = req.Role;
-      if (userRole === "bacsi" || userRole === "admin") {
+      if (userRole === "bacsi") {
         const doctor = await BacSi.findOne({ idtk: userId });
         if (!doctor) {
           return res
