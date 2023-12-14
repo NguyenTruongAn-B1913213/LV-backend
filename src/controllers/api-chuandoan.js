@@ -144,6 +144,12 @@ class APIChuanDoan {
       if (!cannang || !chieucao || !BenhTinh || !malichkham || !maBN) {
         return res.status(400).json({ error: "Vui lòng điền thông tin vào" });
       }
+      const checkchandoan = await chuandoan.findOne({ malichkham: malichkham });
+      if (checkchandoan) {
+        return res
+          .status(400)
+          .json({ error: "Lịch khám đã được chẩn đoán bệnh" });
+      }
       const updatedLichKham = await LichKham.findByIdAndUpdate(
         malichkham,
         { trangThai: "Đã Khám" },

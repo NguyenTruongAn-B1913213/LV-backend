@@ -24,16 +24,25 @@ class APIBacSi {
   }
   async getnameBacSi(req, res) {
     try {
-      const id = req.params.name;
-      console.log(id);
       const doctor = await bacsi.findOne({
-        name: new RegExp(req.params.name, "i"),
+        tenBS: new RegExp(req.params.name, "i"),
       });
+      console.log(doctor);
+      if (!doctor) {
+        // If the doctor is not found, respond with a 404 status code
+        return res.status(404).json({ error: "Doctor not found" });
+      }
+
+      // Respond with the doctor's information
       res.status(200).json(doctor);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      // Log the error for debugging purposes
+      console.error("Error in getnameBacSi:", error);
+      // Respond with a 500 status code and an error message
+      res.status(500).json({ error: "Internal server error" });
     }
   }
+
   async updateLichLamViec(req, res) {
     try {
       const { id } = req.params;

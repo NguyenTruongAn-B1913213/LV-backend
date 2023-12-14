@@ -54,9 +54,9 @@ router.get("/prescriptions", user.authenticateToken, toaThuoc.getToaThuoc);
 router.get("/get-prescription/:prescriptionId", toaThuoc.getToaThuocWithID);
 // router.get("/prescriptions", user.authenticateToken, toaThuoc.getToaThuoc);
 //Tin tức
-router.get("/get-tintuc", TinTuc.getTinTuc);
-router.post("/create-tintuc", TinTuc.createdTinTuc);
-router.get("/get-tintuc/:id", TinTuc.getTinTucWithID);
+// router.get("/get-tintuc", TinTuc.getTinTuc);
+// router.post("/create-tintuc", TinTuc.createdTinTuc);
+// router.get("/get-tintuc/:id", TinTuc.getTinTucWithID);
 // Thông tin phong khám
 router.get("/phongkham", ttPhongKham.getPhongKham);
 router.get("/get-phongkham/:id", ttPhongKham.getIDPhongKham);
@@ -78,10 +78,12 @@ router.get(
 );
 router.get("/check-toathuoc/:appointmentId", Notification.CheckToaTHuoc);
 // Thống kê
-router.get("/get-Thongke", Thongke.getThongKe);
-router.get("/get-Thongke/BS", Thongke.getThongKeBS);
+// router.get("/get-Thongke", Thongke.getThongKe);
+// router.get("/get-Thongke/BS", Thongke.getThongKeBS);
 router.get("/get-Thongke/report", Thongke.getThongKeReport);
 router.get("/get-Thongke/BS/report", Thongke.getThongKeBSReport);
+router.get("/getThongKeBNReport", Thongke.getThongKeBNReport);
+router.get("/getThongKeBS/BNReport", Thongke.getThongKeBSBNReport);
 // router.post("/save-notification", Notification.SaveNotification);
 
 router.get("/user/profile", user.authenticateToken, user.profileUser);

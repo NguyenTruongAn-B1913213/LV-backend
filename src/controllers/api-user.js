@@ -147,7 +147,6 @@ class APIUser {
   }
   async profileUser(req, res) {
     try {
-      console.log(1);
       const userId = req.UserId;
       const userRole = req.Role;
       if (userRole === "bacsi") {

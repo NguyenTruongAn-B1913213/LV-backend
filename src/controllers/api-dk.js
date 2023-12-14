@@ -83,7 +83,7 @@ class APILichKham {
       });
       console.log(appointmentsInSameDay);
       // // Đặt giới hạn số lượng lịch khám trong một ngày
-      const maxAppointmentsPersession = 10; // Số lượng tối đa cho ví dụ
+      const maxAppointmentsPersession = 200; // Số lượng tối đa cho ví dụ
       if (appointmentsInSameDay.length >= maxAppointmentsPersession) {
         console.log(2);
         // Nếu đã quá đông người bệnh đặt lịch trong ngày đó, từ chối đặt lịch
